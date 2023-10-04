@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="common_padding_min">8dp</dimen>
-    <dimen name="movie_cover_width_size">148dp</dimen>
+    <dimen name="movie_cover_width_size">120dp</dimen>
 </resources>

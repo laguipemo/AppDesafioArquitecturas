@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity(), OnMovieListener {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        supportActionBar?.title = "Movies"
+
         mAdapter = MovieAdapter(this)
         mBinding.recyclerview.apply {
             adapter = mAdapter
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity(), OnMovieListener {
 //                    Log.i("CHACHY", it.title)
 //                }
             mAdapter.submitList(newMovieList)
-            mAdapter.notifyDataSetChanged()
+//            mAdapter.notifyDataSetChanged()
 
         }
 

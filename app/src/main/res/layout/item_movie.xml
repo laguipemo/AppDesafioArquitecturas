@@ -13,7 +13,7 @@
 
         <ImageView
             android:id="@+id/ivMovieCover"
-            android:layout_width="120dp"
+            android:layout_width="@dimen/movie_cover_width_size"
             android:layout_height="0dp"
             android:contentDescription="@string/movie_cover_description"
             app:layout_constraintDimensionRatio="1:1"
