@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AppDesafioArquitecturas</string>
+    <string name="movie_cover_description">Cover de la pelicula</string>
 </resources>
