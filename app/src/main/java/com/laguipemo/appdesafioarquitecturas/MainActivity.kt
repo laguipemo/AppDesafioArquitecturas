@@ -1,6 +1,7 @@
 package com.laguipemo.appdesafioarquitecturas
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -26,12 +27,15 @@ class MainActivity : AppCompatActivity(), OnMovieListener {
         mBinding.recyclerview.apply {
             adapter = mAdapter
             layoutManager = GridLayoutManager(
-                this@MainActivity, 3, GridLayoutManager.VERTICAL, false)
+                this@MainActivity, 3, GridLayoutManager.VERTICAL, false
+            )
             setHasFixedSize(false)
         }
 
         lifecycleScope.launch {
             mViewModel.state.collect {
+                mBinding.progressBarLoading.visibility =
+                    if (it.isLoading) View.VISIBLE else View.GONE
                 mAdapter.submitList(it.movies)
             }
         }
