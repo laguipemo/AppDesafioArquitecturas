@@ -1,10 +1,12 @@
 package com.laguipemo.appdesafioarquitecturas
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,23 +22,33 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainViewModel : ViewModel() {
 
-    private val _state = MutableLiveData(UiState())
-    val state: LiveData<UiState> = _state
+    private val _state = MutableStateFlow(UiState())
+    val state: StateFlow<UiState> = _state.asStateFlow()
 
     init {
         viewModelScope.launch {
-            _state.value = _state.value?.copy(isLoading = true)
-            delay(3000)
-            _state.value = _state.value?.copy(
-                movies = Retrofit.Builder()
-                    .baseUrl("https://api.themoviedb.org/3/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                    .create(MoviesService::class.java)
-                    .getMovies()
-                    .results
-            )
-            _state.value = _state.value?.copy(isLoading = false)
+            _state.update {
+                it.copy(
+                    isLoading = true
+                )
+            }
+            delay(2000)
+            _state.update {
+                it.copy(
+                    movies = Retrofit.Builder()
+                        .baseUrl("https://api.themoviedb.org/3/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
+                        .create(MoviesService::class.java)
+                        .getMovies()
+                        .results
+                )
+            }
+            _state.update {
+                it.copy(
+                    isLoading = false
+                )
+            }
         }
     }
 

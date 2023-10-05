@@ -1,13 +1,14 @@
 package com.laguipemo.appdesafioarquitecturas
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.laguipemo.appdesafioarquitecturas.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), OnMovieListener {
 
@@ -30,9 +31,12 @@ class MainActivity : AppCompatActivity(), OnMovieListener {
             setHasFixedSize(false)
         }
 
-        mViewModel.state.observe(this) {
-            mBinding.progressLoading.visibility = if (it.isLoading) View.VISIBLE else View.GONE
-            mAdapter.submitList(it.movies)
+        lifecycleScope.launch {
+            mViewModel.state.collect {
+                mBinding.progressLoading.visibility =
+                    if (it.isLoading) View.VISIBLE else View.GONE
+                mAdapter.submitList(it.movies)
+            }
         }
 
     }
