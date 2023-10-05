@@ -3,6 +3,9 @@ package com.laguipemo.appdesafioarquitecturas
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,8 +21,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainViewModel : ViewModel() {
 
-    private val _state = MutableLiveData(UiState())
-    val state: MutableLiveData<UiState> = _state
+    private val _state = MutableStateFlow(UiState())
+    val state: StateFlow<UiState> = _state.asStateFlow()
 
     init {
         viewModelScope.launch {

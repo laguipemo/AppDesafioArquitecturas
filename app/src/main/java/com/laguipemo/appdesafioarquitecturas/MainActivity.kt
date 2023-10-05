@@ -1,19 +1,14 @@
 package com.laguipemo.appdesafioarquitecturas
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.laguipemo.appdesafioarquitecturas.databinding.ActivityMainBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), OnMovieListener {
 
@@ -35,26 +30,11 @@ class MainActivity : AppCompatActivity(), OnMovieListener {
             setHasFixedSize(false)
         }
 
-        mViewModel.state.observe(this) {
-            mAdapter.submitList(it.movies)
+        lifecycleScope.launch {
+            mViewModel.state.collect {
+                mAdapter.submitList(it.movies)
+            }
         }
-
-
-//        runBlocking {
-//            val newMovieList = Retrofit.Builder()
-//                .baseUrl("https://api.themoviedb.org/3/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build()
-//                .create(MoviesService::class.java)
-//                .getMovies()
-//                .results
-////                .forEach {
-////                    Log.i("CHACHY", it.title)
-////                }
-//            mAdapter.submitList(newMovieList)
-////            mAdapter.notifyDataSetChanged()
-//
-//        }
 
     }
 
