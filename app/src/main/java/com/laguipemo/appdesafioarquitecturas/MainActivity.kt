@@ -39,23 +39,6 @@ class MainActivity : AppCompatActivity(), OnMovieListener {
             mAdapter.submitList(it.movies)
         }
 
-
-//        runBlocking {
-//            val newMovieList = Retrofit.Builder()
-//                .baseUrl("https://api.themoviedb.org/3/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build()
-//                .create(MoviesService::class.java)
-//                .getMovies()
-//                .results
-////                .forEach {
-////                    Log.i("CHACHY", it.title)
-////                }
-//            mAdapter.submitList(newMovieList)
-////            mAdapter.notifyDataSetChanged()
-//
-//        }
-
     }
 
     override fun onMovieClick(movie: ServerMovie) {

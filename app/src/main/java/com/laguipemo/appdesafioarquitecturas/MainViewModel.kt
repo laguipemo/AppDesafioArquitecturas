@@ -1,5 +1,6 @@
 package com.laguipemo.appdesafioarquitecturas
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainViewModel : ViewModel() {
 
     private val _state = MutableLiveData(UiState())
-    val state: MutableLiveData<UiState> = _state
+    val state: LiveData<UiState> = _state
 
     init {
         viewModelScope.launch {
