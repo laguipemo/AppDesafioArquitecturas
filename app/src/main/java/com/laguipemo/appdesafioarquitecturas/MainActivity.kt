@@ -1,11 +1,12 @@
 package com.laguipemo.appdesafioarquitecturas
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.laguipemo.appdesafioarquitecturas.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
