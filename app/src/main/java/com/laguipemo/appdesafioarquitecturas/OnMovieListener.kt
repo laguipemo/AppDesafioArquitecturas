@@ -11,4 +11,5 @@ package com.laguipemo.appdesafioarquitecturas
 
 interface OnMovieListener {
     fun onMovieClick(movie: ServerMovie)
+    fun onFavoriteClick(movie: ServerMovie)
 }

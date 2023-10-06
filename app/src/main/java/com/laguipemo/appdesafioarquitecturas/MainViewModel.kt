@@ -52,6 +52,23 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun updateFavorite(movie: ServerMovie) {
+        movie.isFavorite = !movie.isFavorite
+        viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    movies = it.movies.map {
+                        if (it.id == movie.id) {
+                            movie
+                        } else {
+                            it
+                        }
+                    }
+                )
+            }
+        }
+    }
+
     data class UiState(
         var isLoading: Boolean = false,
         val movies: List<ServerMovie> = emptyList()

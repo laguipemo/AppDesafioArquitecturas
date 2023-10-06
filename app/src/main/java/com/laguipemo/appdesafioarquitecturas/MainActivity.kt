@@ -45,4 +45,8 @@ class MainActivity : AppCompatActivity(), OnMovieListener {
     override fun onMovieClick(movie: ServerMovie) {
         Toast.makeText(applicationContext, movie.title, Toast.LENGTH_SHORT).show()
     }
+
+    override fun onFavoriteClick(movie: ServerMovie) {
+        mViewModel.updateFavorite(movie)
+    }
 }

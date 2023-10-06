@@ -46,6 +46,9 @@ class MovieAdapter(
             with(binding!!){
                 tvMovieTitle.text = movie.title
                 tvMovieVoteAvg.text = movie.vote_average.toString()
+                ibFavorite.setImageResource(
+                    if (movie.isFavorite) R.drawable.ic_favorite_full else R.drawable.ic_favorite_empty
+                )
                 Glide.with(mContext)
                     .load("https://image.tmdb.org/t/p/w500${movie.backdrop_path}")
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -60,6 +63,10 @@ class MovieAdapter(
         private fun setListener(movie: ServerMovie) {
             itemView.setOnClickListener {
                 listener.onMovieClick(movie)
+            }
+
+            binding?.ibFavorite?.setOnClickListener {
+                listener.onFavoriteClick(movie)
             }
         }
     }
