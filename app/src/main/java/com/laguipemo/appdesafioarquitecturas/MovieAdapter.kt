@@ -36,19 +36,21 @@ class MovieAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = getItem(position)
-        holder.bind(movie)
+        holder.bind(movie, position)
     }
 
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private var binding = DataBindingUtil.bind<ItemMovieBinding>(view)
 
-        fun bind(movie: ServerMovie) {
+        fun bind(movie: ServerMovie, position: Int) {
             with(binding!!){
                 tvMovieTitle.text = movie.title
                 tvMovieVoteAvg.text = movie.vote_average.toString()
-                ibFavorite.setImageResource(
-                    if (movie.isFavorite) R.drawable.ic_favorite_full else R.drawable.ic_favorite_empty
-                )
+                if (movie.isFavorite) {
+                    ibFavorite.setImageResource(R.drawable.ic_favorite_full)
+                } else {
+                    ibFavorite.setImageResource(R.drawable.ic_favorite_empty)
+                }
                 Glide.with(mContext)
                     .load("https://image.tmdb.org/t/p/w500${movie.backdrop_path}")
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -57,16 +59,16 @@ class MovieAdapter(
                     .error(R.drawable.ic_broken_image)
                     .into(ivMovieCover)
             }
-            setListener(movie)
+            setListener(movie, position)
         }
 
-        private fun setListener(movie: ServerMovie) {
+        private fun setListener(movie: ServerMovie, position: Int) {
             itemView.setOnClickListener {
-                listener.onMovieClick(movie)
+                listener.onMovieClick(movie, position)
             }
 
             binding?.ibFavorite?.setOnClickListener {
-                listener.onFavoriteClick(movie)
+                listener.onFavoriteClick(movie, position)
             }
         }
     }
