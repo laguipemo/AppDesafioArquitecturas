@@ -1,5 +1,6 @@
 package com.laguipemo.appdesafioarquitecturas
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
@@ -53,20 +54,19 @@ class MainViewModel : ViewModel() {
     }
 
     fun updateFavorite(movie: ServerMovie) {
-        movie.isFavorite = !movie.isFavorite
-//        viewModelScope.launch {
-//            _state.update {
-//                it.copy(
-//                    movies = it.movies.map {
-//                        if (it.id == movie.id) {
-//                            movie
-//                        } else {
-//                            it
-//                        }
-//                    }
-//                )
-//            }
-//        }
+        viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    movies = it.movies.map {
+                        if (it.id == movie.id) {
+                            movie.copy(isFavorite = !movie.isFavorite)
+                        } else {
+                            it
+                        }
+                    }
+                )
+            }
+        }
     }
 
     data class UiState(

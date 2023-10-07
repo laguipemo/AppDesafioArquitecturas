@@ -80,5 +80,5 @@ private object MovieDiffCallback : DiffUtil.ItemCallback<ServerMovie>() {
         oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: ServerMovie, newItem: ServerMovie): Boolean  =
-        oldItem.id == newItem.id
+        oldItem == newItem
 }
