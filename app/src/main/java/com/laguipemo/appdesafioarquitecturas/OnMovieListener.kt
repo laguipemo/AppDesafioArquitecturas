@@ -12,6 +12,6 @@ import java.text.FieldPosition
  **/
 
 interface OnMovieListener {
-    fun onMovieClick(movie: ServerMovie, position: Int)
-    fun onFavoriteClick(movie: ServerMovie, position: Int)
+    fun onMovieClick(movie: ServerMovie)
+    fun onFavoriteClick(movie: ServerMovie)
 }

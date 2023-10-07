@@ -42,12 +42,12 @@ class MainActivity : AppCompatActivity(), OnMovieListener {
 
     }
 
-    override fun onMovieClick(movie: ServerMovie, position: Int) {
+    override fun onMovieClick(movie: ServerMovie) {
         Toast.makeText(applicationContext, movie.title, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onFavoriteClick(movie: ServerMovie, position: Int) {
+    override fun onFavoriteClick(movie: ServerMovie) {
         mViewModel.updateFavorite(movie)
-        mAdapter.notifyItemChanged(position)
+        mAdapter.notifyItemChanged(mAdapter.currentList.indexOf(movie))
     }
 }

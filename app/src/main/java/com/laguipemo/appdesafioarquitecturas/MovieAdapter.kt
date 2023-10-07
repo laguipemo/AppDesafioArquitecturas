@@ -36,13 +36,13 @@ class MovieAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = getItem(position)
-        holder.bind(movie, position)
+        holder.bind(movie)
     }
 
-    inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private var binding = DataBindingUtil.bind<ItemMovieBinding>(view)
 
-        fun bind(movie: ServerMovie, position: Int) {
+        fun bind(movie: ServerMovie) {
             with(binding!!){
                 tvMovieTitle.text = movie.title
                 tvMovieVoteAvg.text = movie.vote_average.toString()
@@ -59,16 +59,16 @@ class MovieAdapter(
                     .error(R.drawable.ic_broken_image)
                     .into(ivMovieCover)
             }
-            setListener(movie, position)
+            setListener(movie)
         }
 
-        private fun setListener(movie: ServerMovie, position: Int) {
+        private fun setListener(movie: ServerMovie) {
             itemView.setOnClickListener {
-                listener.onMovieClick(movie, position)
+                listener.onMovieClick(movie)
             }
 
             binding?.ibFavorite?.setOnClickListener {
-                listener.onFavoriteClick(movie, position)
+                listener.onFavoriteClick(movie)
             }
         }
     }
