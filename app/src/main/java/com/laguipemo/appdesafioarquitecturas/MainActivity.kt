@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.laguipemo.appdesafioarquitecturas.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(), OnMovieListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mAdapter: MovieAdapter
@@ -23,7 +23,10 @@ class MainActivity : AppCompatActivity(), OnMovieListener {
 
         supportActionBar?.title = "Movies"
 
-        mAdapter = MovieAdapter(this)
+        mAdapter = MovieAdapter {
+                movie -> mViewModel.updateFavorite(movie)
+                mAdapter.notifyItemChanged(mAdapter.currentList.indexOf(movie))
+        }
         mBinding.recyclerview.apply {
             adapter = mAdapter
             layoutManager = GridLayoutManager(
@@ -42,12 +45,4 @@ class MainActivity : AppCompatActivity(), OnMovieListener {
 
     }
 
-    override fun onMovieClick(movie: ServerMovie) {
-        Toast.makeText(applicationContext, movie.title, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onFavoriteClick(movie: ServerMovie) {
-        mViewModel.updateFavorite(movie)
-        mAdapter.notifyItemChanged(mAdapter.currentList.indexOf(movie))
-    }
 }
