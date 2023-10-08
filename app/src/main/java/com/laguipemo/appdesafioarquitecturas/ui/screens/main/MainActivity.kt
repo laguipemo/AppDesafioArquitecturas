@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.laguipemo.appdesafioarquitecturas.MoviesApplication
 import com.laguipemo.appdesafioarquitecturas.R
 import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
 import com.laguipemo.appdesafioarquitecturas.databinding.ActivityMainBinding
@@ -17,7 +18,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mAdapter: MainMovieAdapter
-    private val mViewModel: MainViewModel by viewModels()
+    private val mViewModel: MainViewModel by viewModels {
+        MainViewModel.MainViewModelFactory((application as MoviesApplication).database.moviesDao())
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

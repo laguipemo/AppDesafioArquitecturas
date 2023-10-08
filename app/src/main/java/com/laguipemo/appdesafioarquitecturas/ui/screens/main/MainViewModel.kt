@@ -1,7 +1,9 @@
 package com.laguipemo.appdesafioarquitecturas.ui.screens.main
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.laguipemo.appdesafioarquitecturas.data.local.MoviesDao
 import com.laguipemo.appdesafioarquitecturas.data.remote.MoviesService
 import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
 import kotlinx.coroutines.delay
@@ -22,7 +24,9 @@ import retrofit2.converter.gson.GsonConverterFactory
  * https://github.com/laguipemo/
  **/
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+    private val dao: MoviesDao
+) : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state.asStateFlow()
@@ -82,5 +86,16 @@ class MainViewModel : ViewModel() {
         var isLoading: Boolean = false,
         val movies: List<ServerMovie> = emptyList()
     )
+
+    class MainViewModelFactory(private val dao: MoviesDao) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return MainViewModel(dao) as T
+            } else {
+                throw IllegalArgumentException("ViewModel Not Found")
+            }
+        }
+    }
 }
 
