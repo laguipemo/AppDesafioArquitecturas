@@ -41,12 +41,14 @@ android {
 }
 
 dependencies {
-    val androidxCoreVersion = "1.12.0"
+    val androidxCoreVersion = "1.10.0"
     val appcompatVersion = "1.6.1"
     val materialVersion = "1.9.0"
     val constraintlayoutVersion = "2.1.4"
     val glideVersion = "4.16.0"
     val retrofitVersion = "2.9.0"
+    val roomVersion = "2.6.0-rc01"
+    val coroutinesVersion = "1.7.1"
 
     implementation("androidx.core:core-ktx:$androidxCoreVersion")
     implementation("androidx.appcompat:appcompat:$appcompatVersion")
@@ -69,7 +71,12 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.1")
 
     //Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+
+    //Room
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.room:room-runtime:$roomVersion")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
