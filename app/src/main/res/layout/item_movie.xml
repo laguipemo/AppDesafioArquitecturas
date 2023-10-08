@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.laguipemo.appdesafioarquitecturas.MainViewModel" />
+            type="com.laguipemo.appdesafioarquitecturas.ui.screens.main.MainViewModel" />
 
     </data>
 

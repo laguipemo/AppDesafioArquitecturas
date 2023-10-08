@@ -1,4 +1,4 @@
-package com.laguipemo.appdesafioarquitecturas
+package com.laguipemo.appdesafioarquitecturas.ui.screens.main
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.laguipemo.appdesafioarquitecturas.R
+import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
 import com.laguipemo.appdesafioarquitecturas.databinding.ItemMovieBinding
 
 /**
@@ -21,10 +23,10 @@ import com.laguipemo.appdesafioarquitecturas.databinding.ItemMovieBinding
  * https://github.com/laguipemo/
  **/
 
-class MovieAdapter(
+class MainMovieAdapter(
     private val onMovieClick: (movie: ServerMovie) -> Unit,
     private val onMovieAction: (movieAction: MovieAction) -> Unit
-) : ListAdapter<ServerMovie, MovieAdapter.ViewHolder>(MovieDiffCallback) {
+) : ListAdapter<ServerMovie, MainMovieAdapter.ViewHolder>(MovieDiffCallback) {
 
     private lateinit var mContext: Context
 
@@ -80,12 +82,12 @@ class MovieAdapter(
 
     }
 
-}
+    private object MovieDiffCallback : DiffUtil.ItemCallback<ServerMovie>() {
+        override fun areItemsTheSame(oldItem: ServerMovie, newItem: ServerMovie): Boolean =
+            oldItem.id == newItem.id
 
-private object MovieDiffCallback : DiffUtil.ItemCallback<ServerMovie>() {
-    override fun areItemsTheSame(oldItem: ServerMovie, newItem: ServerMovie): Boolean =
-        oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: ServerMovie, newItem: ServerMovie): Boolean  =
+            oldItem == newItem
+    }
 
-    override fun areContentsTheSame(oldItem: ServerMovie, newItem: ServerMovie): Boolean  =
-        oldItem == newItem
 }

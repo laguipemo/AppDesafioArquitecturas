@@ -1,8 +1,9 @@
-package com.laguipemo.appdesafioarquitecturas
+package com.laguipemo.appdesafioarquitecturas.ui.screens.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.laguipemo.appdesafioarquitecturas.data.remote.MoviesService
+import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

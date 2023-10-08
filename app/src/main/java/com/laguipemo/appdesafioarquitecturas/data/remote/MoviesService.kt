@@ -1,4 +1,4 @@
-package com.laguipemo.appdesafioarquitecturas
+package com.laguipemo.appdesafioarquitecturas.data.remote
 
 import retrofit2.http.GET
 

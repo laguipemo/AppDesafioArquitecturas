@@ -1,4 +1,4 @@
-package com.laguipemo.appdesafioarquitecturas
+package com.laguipemo.appdesafioarquitecturas.ui.screens.main
 
 import android.os.Bundle
 import android.view.View
@@ -8,13 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.laguipemo.appdesafioarquitecturas.R
+import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
 import com.laguipemo.appdesafioarquitecturas.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
-    private lateinit var mAdapter: MovieAdapter
+    private lateinit var mAdapter: MainMovieAdapter
     private val mViewModel: MainViewModel by viewModels()
 
 
@@ -24,7 +26,13 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Movies"
 
-        mAdapter = MovieAdapter(
+        setupRecyclerView()
+        handleUiState()
+
+    }
+
+    private fun setupRecyclerView() {
+        mAdapter = MainMovieAdapter(
             onMovieClick = { movie -> onMovieClick(movie) },
             onMovieAction = { moviAction -> mViewModel.onMovieAction(moviAction) }
         )
@@ -35,7 +43,9 @@ class MainActivity : AppCompatActivity() {
             )
             setHasFixedSize(false)
         }
+    }
 
+    private fun handleUiState() {
         lifecycleScope.launch {
             mViewModel.state.collect {
                 mBinding.progressLoading.visibility =
@@ -43,7 +53,6 @@ class MainActivity : AppCompatActivity() {
                 mAdapter.submitList(it.movies)
             }
         }
-
     }
 
     private fun onMovieClick(movie: ServerMovie) {

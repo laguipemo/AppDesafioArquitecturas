@@ -1,4 +1,4 @@
-package com.laguipemo.appdesafioarquitecturas
+package com.laguipemo.appdesafioarquitecturas.data.remote
 
 data class ServerMovie(
     val adult: Boolean,

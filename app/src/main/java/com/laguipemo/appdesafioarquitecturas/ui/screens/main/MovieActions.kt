@@ -1,4 +1,6 @@
-package com.laguipemo.appdesafioarquitecturas
+package com.laguipemo.appdesafioarquitecturas.ui.screens.main
+
+import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
 
 /**
  * Project: AppDesafioArquitecturas
