@@ -17,16 +17,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAdapter: MovieAdapter
     private val mViewModel: MainViewModel by viewModels()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         supportActionBar?.title = "Movies"
 
-        mAdapter = MovieAdapter {
-                movie -> mViewModel.updateFavorite(movie)
-                mAdapter.notifyItemChanged(mAdapter.currentList.indexOf(movie))
-        }
+        mAdapter = MovieAdapter(
+            onMovieClick = { movie -> onMovieClick(movie) },
+            onMovieAction = { moviAction -> mViewModel.onMovieAction(moviAction) }
+        )
         mBinding.recyclerview.apply {
             adapter = mAdapter
             layoutManager = GridLayoutManager(
@@ -43,6 +44,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun onMovieClick(movie: ServerMovie) {
+        Toast.makeText(this, movie.title, Toast.LENGTH_SHORT).show()
     }
 
 }

@@ -22,7 +22,8 @@ import com.laguipemo.appdesafioarquitecturas.databinding.ItemMovieBinding
  **/
 
 class MovieAdapter(
-    private val onFavoriteClick: (movie: ServerMovie) -> Unit
+    private val onMovieClick: (movie: ServerMovie) -> Unit,
+    private val onMovieAction: (movieAction: MovieAction) -> Unit
 ) : ListAdapter<ServerMovie, MovieAdapter.ViewHolder>(MovieDiffCallback) {
 
     private lateinit var mContext: Context
@@ -31,7 +32,8 @@ class MovieAdapter(
         mContext = parent.context
         return ViewHolder(
             LayoutInflater.from(mContext).inflate(R.layout.item_movie, parent, false),
-            onFavoriteClick
+            onMovieClick,
+            onMovieAction
             )
     }
 
@@ -42,7 +44,8 @@ class MovieAdapter(
 
     inner class ViewHolder(
         view: View,
-        private val onFavoriteClick: (movie: ServerMovie) -> Unit
+        private val onMovieClick: (movie: ServerMovie) -> Unit,
+        private val onMovieAction: (movieAction: MovieAction) -> Unit
     ) : RecyclerView.ViewHolder(view) {
 
         private var binding = DataBindingUtil.bind<ItemMovieBinding>(view)
@@ -64,8 +67,12 @@ class MovieAdapter(
                     .error(R.drawable.ic_broken_image)
                     .into(ivMovieCover)
 
+                itemView.setOnClickListener {
+                    onMovieClick(movie)
+                }
+
                 ibFavorite.setOnClickListener {
-                    onFavoriteClick(movie)
+                    onMovieAction(MovieAction.MovieFavoriteClick(movie))
                 }
             }
 

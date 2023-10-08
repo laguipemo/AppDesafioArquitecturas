@@ -53,19 +53,27 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun updateFavorite(movie: ServerMovie) {
-        viewModelScope.launch {
-            _state.update {
-                it.copy(
-                    movies = it.movies.map {
-                        if (it.id == movie.id) {
-                            movie.copy(isFavorite = !movie.isFavorite)
-                        } else {
-                            it
-                        }
+    fun onMovieAction(movieAction: MovieAction) {
+        when (movieAction) {
+            is MovieAction.MovieFavoriteClick -> {
+                viewModelScope.launch {
+                    _state.update {
+                        it.copy(
+                            movies = it.movies.map {
+                                if (it.id == movieAction.movie.id) {
+                                    movieAction.movie.copy(isFavorite = !movieAction.movie.isFavorite)
+                                } else {
+                                    it
+                                }
+                            }
+                        )
                     }
-                )
+                }
             }
+
+            is MovieAction.MovieDeleteClick -> {}
+
+            is MovieAction.MovieShareClick -> {}
         }
     }
 
