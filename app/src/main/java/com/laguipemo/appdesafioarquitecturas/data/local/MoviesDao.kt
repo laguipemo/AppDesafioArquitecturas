@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Project: AppDesafioArquitecturas
@@ -18,7 +19,7 @@ import androidx.room.Update
 interface MoviesDao {
 
     @Query("SELECT * FROM LocalMovie")
-    suspend fun getMovies(): List<LocalMovie>
+    fun getMovies(): Flow<List<LocalMovie>>
 
     @Insert
     suspend fun insertMovie(movie: LocalMovie)

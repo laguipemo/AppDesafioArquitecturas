@@ -55,11 +55,13 @@ class MainViewModel(
                 )
 
             }
-            _state.update {
-                it.copy(
-                    isLoading = false,
-                    movies = dao.getMovies().map { it.toMovie() }
-                )
+            dao.getMovies().collect { movies ->
+                _state.update {
+                    it.copy(
+                        isLoading = false,
+                        movies = movies.map { it.toMovie() }
+                    )
+                }
             }
 
         }
@@ -72,17 +74,6 @@ class MainViewModel(
                     dao.updateMovie(movieAction.movie.copy(
                         isFavorite = !movieAction.movie.isFavorite
                     ).toLocalMovie())
-                    _state.update {
-                        it.copy(
-                            movies = it.movies.map {
-                                if (it.id == movieAction.movie.id) {
-                                    movieAction.movie.copy(isFavorite = !movieAction.movie.isFavorite)
-                                } else {
-                                    it
-                                }
-                            }
-                        )
-                    }
                 }
             }
 
