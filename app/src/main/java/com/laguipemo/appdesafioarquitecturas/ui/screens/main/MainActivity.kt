@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.laguipemo.appdesafioarquitecturas.Movie
 import com.laguipemo.appdesafioarquitecturas.MoviesApplication
 import com.laguipemo.appdesafioarquitecturas.R
 import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onMovieClick(movie: ServerMovie) {
+    private fun onMovieClick(movie: Movie) {
         Toast.makeText(this, movie.title, Toast.LENGTH_SHORT).show()
     }
 

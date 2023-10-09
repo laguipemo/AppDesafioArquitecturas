@@ -3,9 +3,13 @@ package com.laguipemo.appdesafioarquitecturas.ui.screens.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.laguipemo.appdesafioarquitecturas.Movie
 import com.laguipemo.appdesafioarquitecturas.data.local.MoviesDao
+import com.laguipemo.appdesafioarquitecturas.data.local.toMovie
 import com.laguipemo.appdesafioarquitecturas.data.remote.MoviesService
 import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
+import com.laguipemo.appdesafioarquitecturas.data.remote.toLocalMovie
+import com.laguipemo.appdesafioarquitecturas.toLocalMovie
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,28 +37,31 @@ class MainViewModel(
 
     init {
         viewModelScope.launch {
+            //if dabase is empty, populate it
+            if (dao.getCount() == 0) {
+                _state.update {
+                    it.copy(
+                        isLoading = true
+                    )
+                }
+                dao.insertMovies(Retrofit.Builder()
+                    .baseUrl("https://api.themoviedb.org/3/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                    .create(MoviesService::class.java)
+                    .getMovies()
+                    .results
+                    .map { it.toLocalMovie() }
+                )
+
+            }
             _state.update {
                 it.copy(
-                    isLoading = true
+                    isLoading = false,
+                    movies = dao.getMovies().map { it.toMovie() }
                 )
             }
-            delay(2000)
-            _state.update {
-                it.copy(
-                    movies = Retrofit.Builder()
-                        .baseUrl("https://api.themoviedb.org/3/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build()
-                        .create(MoviesService::class.java)
-                        .getMovies()
-                        .results
-                )
-            }
-            _state.update {
-                it.copy(
-                    isLoading = false
-                )
-            }
+
         }
     }
 
@@ -62,6 +69,9 @@ class MainViewModel(
         when (movieAction) {
             is MovieAction.MovieFavoriteClick -> {
                 viewModelScope.launch {
+                    dao.updateMovie(movieAction.movie.copy(
+                        isFavorite = !movieAction.movie.isFavorite
+                    ).toLocalMovie())
                     _state.update {
                         it.copy(
                             movies = it.movies.map {
@@ -84,7 +94,7 @@ class MainViewModel(
 
     data class UiState(
         var isLoading: Boolean = false,
-        val movies: List<ServerMovie> = emptyList()
+        val movies: List<Movie> = emptyList()
     )
 
     class MainViewModelFactory(private val dao: MoviesDao) : ViewModelProvider.Factory {

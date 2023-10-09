@@ -1,21 +1,17 @@
-package com.laguipemo.appdesafioarquitecturas.data.local
+package com.laguipemo.appdesafioarquitecturas
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.laguipemo.appdesafioarquitecturas.Movie
+import com.laguipemo.appdesafioarquitecturas.data.local.LocalMovie
 
 /**
  * Project: AppDesafioArquitecturas
- * from: com.laguipemo.appdesafioarquitecturas.data.local
- * Created by Lázaro Guillermo Pérez Montoto (chachy) on 8/10/23 at 22:38
+ * from: com.laguipemo.appdesafioarquitecturas
+ * Created by Lázaro Guillermo Pérez Montoto (chachy) on 9/10/23 at 1:34
  * All rights reserved 2023
  *
  * https://github.com/laguipemo/
  **/
 
-@Entity(tableName = "LocalMovie")
-data class LocalMovie(
-    @PrimaryKey(autoGenerate = true)
+data class Movie(
     val id: Int,
     val title: String,
     val overview: String,
@@ -25,7 +21,7 @@ data class LocalMovie(
     val isFavorite: Boolean = false
 )
 
-fun LocalMovie.toMovie() = Movie(
+fun Movie.toLocalMovie() = LocalMovie(
     id = id,
     title = title,
     overview = overview,
@@ -34,4 +30,3 @@ fun LocalMovie.toMovie() = Movie(
     poster_path = poster_path,
     isFavorite = isFavorite
 )
-

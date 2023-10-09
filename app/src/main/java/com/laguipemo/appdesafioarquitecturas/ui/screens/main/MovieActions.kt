@@ -1,5 +1,6 @@
 package com.laguipemo.appdesafioarquitecturas.ui.screens.main
 
+import com.laguipemo.appdesafioarquitecturas.Movie
 import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
 
 /**
@@ -12,7 +13,7 @@ import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
  **/
 
 sealed interface MovieAction {
-    class MovieFavoriteClick(val movie: ServerMovie) : MovieAction
-    class MovieDeleteClick(val movie: ServerMovie) : MovieAction
-    class MovieShareClick(val movie: ServerMovie) : MovieAction
+    class MovieFavoriteClick(val movie: Movie) : MovieAction
+    class MovieDeleteClick(val movie: Movie) : MovieAction
+    class MovieShareClick(val movie: Movie) : MovieAction
 }

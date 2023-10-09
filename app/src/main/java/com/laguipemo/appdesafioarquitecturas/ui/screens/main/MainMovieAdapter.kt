@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.laguipemo.appdesafioarquitecturas.Movie
 import com.laguipemo.appdesafioarquitecturas.R
 import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
 import com.laguipemo.appdesafioarquitecturas.databinding.ItemMovieBinding
@@ -24,9 +25,9 @@ import com.laguipemo.appdesafioarquitecturas.databinding.ItemMovieBinding
  **/
 
 class MainMovieAdapter(
-    private val onMovieClick: (movie: ServerMovie) -> Unit,
+    private val onMovieClick: (movie: Movie) -> Unit,
     private val onMovieAction: (movieAction: MovieAction) -> Unit
-) : ListAdapter<ServerMovie, MainMovieAdapter.ViewHolder>(MovieDiffCallback) {
+) : ListAdapter<Movie, MainMovieAdapter.ViewHolder>(MovieDiffCallback) {
 
     private lateinit var mContext: Context
 
@@ -46,13 +47,13 @@ class MainMovieAdapter(
 
     inner class ViewHolder(
         view: View,
-        private val onMovieClick: (movie: ServerMovie) -> Unit,
+        private val onMovieClick: (movie: Movie) -> Unit,
         private val onMovieAction: (movieAction: MovieAction) -> Unit
     ) : RecyclerView.ViewHolder(view) {
 
         private var binding = DataBindingUtil.bind<ItemMovieBinding>(view)
 
-        fun bind(movie: ServerMovie) {
+        fun bind(movie: Movie) {
             with(binding!!){
                 tvMovieTitle.text = movie.title
                 tvMovieVoteAvg.text = movie.vote_average.toString()
@@ -82,11 +83,11 @@ class MainMovieAdapter(
 
     }
 
-    private object MovieDiffCallback : DiffUtil.ItemCallback<ServerMovie>() {
-        override fun areItemsTheSame(oldItem: ServerMovie, newItem: ServerMovie): Boolean =
+    private object MovieDiffCallback : DiffUtil.ItemCallback<Movie>() {
+        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: ServerMovie, newItem: ServerMovie): Boolean  =
+        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean  =
             oldItem == newItem
     }
 

@@ -1,5 +1,8 @@
 package com.laguipemo.appdesafioarquitecturas.data.remote
 
+import com.laguipemo.appdesafioarquitecturas.Movie
+import com.laguipemo.appdesafioarquitecturas.data.local.LocalMovie
+
 data class ServerMovie(
     val adult: Boolean,
     val backdrop_path: String,
@@ -16,4 +19,24 @@ data class ServerMovie(
     val vote_average: Double,
     val vote_count: Int,
     val isFavorite: Boolean = false
+)
+
+fun ServerMovie.toLocalMovie() = LocalMovie(
+    id = 0,
+    title = title,
+    overview = overview,
+    vote_average = vote_average,
+    backdrop_path = backdrop_path,
+    poster_path = poster_path,
+    isFavorite = isFavorite
+)
+
+fun ServerMovie.toMovie() = Movie(
+    id = id,
+    title = title,
+    overview = overview,
+    vote_average = vote_average,
+    backdrop_path = backdrop_path,
+    poster_path = poster_path,
+    isFavorite = isFavorite
 )
