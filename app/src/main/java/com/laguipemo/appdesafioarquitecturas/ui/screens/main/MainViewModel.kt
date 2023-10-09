@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.laguipemo.appdesafioarquitecturas.Movie
+import com.laguipemo.appdesafioarquitecturas.data.MoviesRepository
 import com.laguipemo.appdesafioarquitecturas.data.local.MoviesDao
 import com.laguipemo.appdesafioarquitecturas.data.local.toMovie
 import com.laguipemo.appdesafioarquitecturas.data.remote.MoviesService
@@ -14,6 +15,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -29,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  **/
 
 class MainViewModel(
-    private val dao: MoviesDao
+    private val repository: MoviesRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
@@ -37,33 +39,16 @@ class MainViewModel(
 
     init {
         viewModelScope.launch {
-            //if dabase is empty, populate it
-            if (dao.getCount() == 0) {
-                _state.update {
-                    it.copy(
-                        isLoading = true
-                    )
-                }
-                dao.insertMovies(Retrofit.Builder()
-                    .baseUrl("https://api.themoviedb.org/3/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                    .create(MoviesService::class.java)
-                    .getMovies()
-                    .results
-                    .map { it.toLocalMovie() }
-                )
-
-            }
-            dao.getMovies().collect { movies ->
+            _state.update {it.copy(isLoading = true)}
+            repository.requestMovies()
+            repository.movies.collect { movies ->
                 _state.update {
                     it.copy(
                         isLoading = false,
-                        movies = movies.map { it.toMovie() }
+                        movies = movies
                     )
                 }
             }
-
         }
     }
 
@@ -71,9 +56,11 @@ class MainViewModel(
         when (movieAction) {
             is MovieAction.MovieFavoriteClick -> {
                 viewModelScope.launch {
-                    dao.updateMovie(movieAction.movie.copy(
-                        isFavorite = !movieAction.movie.isFavorite
-                    ).toLocalMovie())
+                    repository.updateMovie(
+                        movieAction.movie.copy(
+                            isFavorite = !movieAction.movie.isFavorite
+                        )
+                    )
                 }
             }
 
@@ -88,11 +75,11 @@ class MainViewModel(
         val movies: List<Movie> = emptyList()
     )
 
-    class MainViewModelFactory(private val dao: MoviesDao) : ViewModelProvider.Factory {
+    class MainViewModelFactory(private val repository: MoviesRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return MainViewModel(dao) as T
+                return MainViewModel(repository) as T
             } else {
                 throw IllegalArgumentException("ViewModel Not Found")
             }

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mAdapter: MainMovieAdapter
     private val mViewModel: MainViewModel by viewModels {
-        MainViewModel.MainViewModelFactory((application as MoviesApplication).database.moviesDao())
+        MainViewModel.MainViewModelFactory((application as MoviesApplication).repository)
     }
 
 
