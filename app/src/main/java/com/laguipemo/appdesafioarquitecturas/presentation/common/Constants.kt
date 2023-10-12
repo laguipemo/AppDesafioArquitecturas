@@ -1,4 +1,4 @@
-package com.laguipemo.appdesafioarquitecturas.ui.common
+package com.laguipemo.appdesafioarquitecturas.presentation.common
 
 /**
  * Project: AppDesafioArquitecturas

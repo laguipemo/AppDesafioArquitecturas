@@ -1,4 +1,4 @@
-package com.laguipemo.appdesafioarquitecturas
+package com.laguipemo.appdesafioarquitecturas.domain.model
 
 import com.laguipemo.appdesafioarquitecturas.data.local.LocalMovie
 

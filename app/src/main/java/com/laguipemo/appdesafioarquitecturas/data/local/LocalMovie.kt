@@ -2,7 +2,7 @@ package com.laguipemo.appdesafioarquitecturas.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.laguipemo.appdesafioarquitecturas.Movie
+import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
 
 /**
  * Project: AppDesafioArquitecturas

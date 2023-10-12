@@ -1,6 +1,6 @@
 package com.laguipemo.appdesafioarquitecturas.data.remote
 
-import com.laguipemo.appdesafioarquitecturas.Movie
+import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

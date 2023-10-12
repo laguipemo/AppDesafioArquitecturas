@@ -1,7 +1,6 @@
-package com.laguipemo.appdesafioarquitecturas.ui.screens.main
+package com.laguipemo.appdesafioarquitecturas.presentation.ui.screens.main
 
-import com.laguipemo.appdesafioarquitecturas.Movie
-import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
+import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
 
 /**
  * Project: AppDesafioArquitecturas

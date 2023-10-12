@@ -1,4 +1,4 @@
-package com.laguipemo.appdesafioarquitecturas.ui.screens.main
+package com.laguipemo.appdesafioarquitecturas.presentation.ui.screens.main
 
 import android.os.Bundle
 import android.view.View
@@ -8,10 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.laguipemo.appdesafioarquitecturas.Movie
+import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
 import com.laguipemo.appdesafioarquitecturas.MoviesApplication
 import com.laguipemo.appdesafioarquitecturas.R
-import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
 import com.laguipemo.appdesafioarquitecturas.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
 

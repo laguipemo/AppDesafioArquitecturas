@@ -1,25 +1,15 @@
-package com.laguipemo.appdesafioarquitecturas.ui.screens.main
+package com.laguipemo.appdesafioarquitecturas.presentation.ui.screens.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.laguipemo.appdesafioarquitecturas.Movie
+import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
 import com.laguipemo.appdesafioarquitecturas.data.MoviesRepository
-import com.laguipemo.appdesafioarquitecturas.data.local.MoviesDao
-import com.laguipemo.appdesafioarquitecturas.data.local.toMovie
-import com.laguipemo.appdesafioarquitecturas.data.remote.MoviesService
-import com.laguipemo.appdesafioarquitecturas.data.remote.ServerMovie
-import com.laguipemo.appdesafioarquitecturas.data.remote.toLocalMovie
-import com.laguipemo.appdesafioarquitecturas.toLocalMovie
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Project: AppDesafioArquitecturas

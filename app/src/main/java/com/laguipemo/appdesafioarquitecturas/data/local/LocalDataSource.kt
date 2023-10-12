@@ -1,7 +1,7 @@
 package com.laguipemo.appdesafioarquitecturas.data.local
 
-import com.laguipemo.appdesafioarquitecturas.Movie
-import com.laguipemo.appdesafioarquitecturas.toLocalMovie
+import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
+import com.laguipemo.appdesafioarquitecturas.domain.model.toLocalMovie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.map
 
 class LocalDataSource(private val dao: MoviesDao) {
 
-    val movies: Flow<List<Movie>> = dao.getMovies().map {localMovies ->
+    val movies: Flow<List<Movie>> = dao.getMovies().map { localMovies ->
         localMovies.map { it.toMovie() }
     }
 

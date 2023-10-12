@@ -1,6 +1,6 @@
 package com.laguipemo.appdesafioarquitecturas.data.remote
 
-import com.laguipemo.appdesafioarquitecturas.Movie
+import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
 import com.laguipemo.appdesafioarquitecturas.data.local.LocalMovie
 
 data class ServerMovie(
