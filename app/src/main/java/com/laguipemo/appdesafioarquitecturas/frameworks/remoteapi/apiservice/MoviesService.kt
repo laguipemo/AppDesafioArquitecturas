@@ -1,5 +1,6 @@
-package com.laguipemo.appdesafioarquitecturas.data.remote
+package com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.apiservice
 
+import com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.model.MovieResult
 import retrofit2.http.GET
 
 /**

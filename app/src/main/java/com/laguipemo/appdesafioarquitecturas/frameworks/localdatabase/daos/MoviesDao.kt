@@ -1,9 +1,10 @@
-package com.laguipemo.appdesafioarquitecturas.data.local
+package com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.daos
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.entities.LocalMovie
 import kotlinx.coroutines.flow.Flow
 
 /**

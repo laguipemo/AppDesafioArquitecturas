@@ -2,9 +2,11 @@ package com.laguipemo.appdesafioarquitecturas
 
 import android.app.Application
 import com.laguipemo.appdesafioarquitecturas.data.MoviesRepository
-import com.laguipemo.appdesafioarquitecturas.data.local.LocalDataSource
-import com.laguipemo.appdesafioarquitecturas.data.local.MoviesDatabase
-import com.laguipemo.appdesafioarquitecturas.data.remote.RemoteDataSource
+import com.laguipemo.appdesafioarquitecturas.data.datasources.local.LocalDataSource
+import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.MoviesDatabase
+import com.laguipemo.appdesafioarquitecturas.data.datasources.remote.RemoteDataSource
+import com.laguipemo.appdesafioarquitecturas.frameworks.datasourcesimpl.local.LocalDataSourceImpl
+import com.laguipemo.appdesafioarquitecturas.frameworks.datasourcesimpl.remote.RemoteDataSourceImpl
 
 /**
  * Project: AppDesafioArquitecturas
@@ -20,8 +22,8 @@ class MoviesApplication : Application(){
     val database : MoviesDatabase by lazy { MoviesDatabase.getDatabase(this) }
     val repository: MoviesRepository by lazy {
         MoviesRepository(
-            LocalDataSource(database.moviesDao()),
-            RemoteDataSource()
+            LocalDataSourceImpl(database.moviesDao()),
+            RemoteDataSourceImpl()
         )
     }
 }

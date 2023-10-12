@@ -1,7 +1,7 @@
-package com.laguipemo.appdesafioarquitecturas.data.remote
+package com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.model
 
 import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
-import com.laguipemo.appdesafioarquitecturas.data.local.LocalMovie
+import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.entities.LocalMovie
 
 data class ServerMovie(
     val adult: Boolean,

@@ -1,9 +1,11 @@
-package com.laguipemo.appdesafioarquitecturas.data.local
+package com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.daos.MoviesDao
+import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.entities.LocalMovie
 
 /**
  * Project: AppDesafioArquitecturas
@@ -30,6 +32,7 @@ abstract class MoviesDatabase : RoomDatabase() {
                 MoviesDatabase::class.java,
                 "movies_database")
             .build()
+            .also { INSTANCE = it }
         }
 
     }

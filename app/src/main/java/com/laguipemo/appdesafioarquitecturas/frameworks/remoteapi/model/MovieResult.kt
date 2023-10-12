@@ -1,4 +1,4 @@
-package com.laguipemo.appdesafioarquitecturas.data.remote
+package com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.model
 
 data class MovieResult(
     val page: Int,

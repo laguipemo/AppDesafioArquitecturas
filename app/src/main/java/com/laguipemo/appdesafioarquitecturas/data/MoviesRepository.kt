@@ -1,8 +1,8 @@
 package com.laguipemo.appdesafioarquitecturas.data
 
 import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
-import com.laguipemo.appdesafioarquitecturas.data.local.LocalDataSource
-import com.laguipemo.appdesafioarquitecturas.data.remote.RemoteDataSource
+import com.laguipemo.appdesafioarquitecturas.data.datasources.local.LocalDataSource
+import com.laguipemo.appdesafioarquitecturas.data.datasources.remote.RemoteDataSource
 import kotlinx.coroutines.flow.Flow
 
 /**

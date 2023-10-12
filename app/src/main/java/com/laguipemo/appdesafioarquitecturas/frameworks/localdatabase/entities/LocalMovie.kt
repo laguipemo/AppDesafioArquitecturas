@@ -1,4 +1,4 @@
-package com.laguipemo.appdesafioarquitecturas.data.local
+package com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

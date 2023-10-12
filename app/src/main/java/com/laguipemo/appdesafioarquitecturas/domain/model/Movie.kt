@@ -1,6 +1,6 @@
 package com.laguipemo.appdesafioarquitecturas.domain.model
 
-import com.laguipemo.appdesafioarquitecturas.data.local.LocalMovie
+import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.entities.LocalMovie
 
 /**
  * Project: AppDesafioArquitecturas
