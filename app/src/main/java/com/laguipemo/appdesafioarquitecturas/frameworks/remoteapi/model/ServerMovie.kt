@@ -1,23 +1,38 @@
 package com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.model
 
+import com.google.gson.annotations.SerializedName
 import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
 import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.entities.LocalMovie
 
 data class ServerMovie(
+    @SerializedName("adult")
     val adult: Boolean,
-    val backdrop_path: String,
-    val genre_ids: List<Int>,
+    @SerializedName("backdrop_path")
+    val backdropPath: String,
+    @SerializedName("genre_ids")
+    val genreIds: List<Int>,
+    @SerializedName("id")
     val id: Int,
-    val original_language: String,
-    val original_title: String,
+    @SerializedName("original_language")
+    val originalLanguage: String,
+    @SerializedName("original_title")
+    val originalTitle: String,
+    @SerializedName("overview")
     val overview: String,
+    @SerializedName("popularity")
     val popularity: Double,
-    val poster_path: String,
-    val release_date: String,
+    @SerializedName("poster_path")
+    val posterPath: String,
+    @SerializedName("release_date")
+    val releaseDate: String,
+    @SerializedName("title")
     val title: String,
+    @SerializedName("video")
     val video: Boolean,
-    val vote_average: Double,
-    val vote_count: Int,
+    @SerializedName("vote_average")
+    val voteAverage: Double,
+    @SerializedName("vote_count")
+    val voteCount: Int,
     val isFavorite: Boolean = false
 )
 
@@ -25,9 +40,9 @@ fun ServerMovie.toLocalMovie() = LocalMovie(
     id = 0,
     title = title,
     overview = overview,
-    vote_average = vote_average,
-    backdrop_path = backdrop_path,
-    poster_path = poster_path,
+    voteAverage = voteAverage,
+    backdropPath = backdropPath,
+    posterPath = posterPath,
     isFavorite = isFavorite
 )
 
@@ -35,8 +50,8 @@ fun ServerMovie.toMovie() = Movie(
     id = id,
     title = title,
     overview = overview,
-    vote_average = vote_average,
-    backdrop_path = backdrop_path,
-    poster_path = poster_path,
+    voteAverage = voteAverage,
+    backdropPath = backdropPath,
+    posterPath = posterPath,
     isFavorite = isFavorite
 )

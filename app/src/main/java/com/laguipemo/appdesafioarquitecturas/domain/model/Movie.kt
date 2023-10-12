@@ -15,9 +15,9 @@ data class Movie(
     val id: Int,
     val title: String,
     val overview: String,
-    val vote_average: Double,
-    val backdrop_path: String,
-    val poster_path: String,
+    val voteAverage: Double,
+    val backdropPath: String,
+    val posterPath: String,
     val isFavorite: Boolean = false
 )
 
@@ -25,8 +25,8 @@ fun Movie.toLocalMovie() = LocalMovie(
     id = id,
     title = title,
     overview = overview,
-    vote_average = vote_average,
-    backdrop_path = backdrop_path,
-    poster_path = poster_path,
+    voteAverage = voteAverage,
+    backdropPath = backdropPath,
+    posterPath = posterPath,
     isFavorite = isFavorite
 )

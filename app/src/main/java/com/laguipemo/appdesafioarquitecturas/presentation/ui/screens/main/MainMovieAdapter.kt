@@ -55,14 +55,14 @@ class MainMovieAdapter(
         fun bind(movie: Movie) {
             with(binding!!){
                 tvMovieTitle.text = movie.title
-                tvMovieVoteAvg.text = movie.vote_average.toString()
+                tvMovieVoteAvg.text = movie.voteAverage.toString()
                 if (movie.isFavorite) {
                     ibFavorite.setImageResource(R.drawable.ic_favorite_full)
                 } else {
                     ibFavorite.setImageResource(R.drawable.ic_favorite_empty)
                 }
                 Glide.with(mContext)
-                    .load("https://image.tmdb.org/t/p/w500${movie.backdrop_path}")
+                    .load("https://image.tmdb.org/t/p/w500${movie.backdropPath}")
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
                     .placeholder(R.drawable.ic_access_time)
