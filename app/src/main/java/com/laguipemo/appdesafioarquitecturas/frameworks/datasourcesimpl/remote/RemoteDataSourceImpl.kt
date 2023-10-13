@@ -15,12 +15,9 @@ import com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.RetrofitServic
  * https://github.com/laguipemo/
  **/
 
-class RemoteDataSourceImpl : RemoteDataSource {
+class RemoteDataSourceImpl(private val moviesService: MoviesService) : RemoteDataSource {
 
     override suspend fun getMovies(): List<Movie> =
-        RetrofitServiceFactory.getInstance()
-            .retrofit.create(MoviesService::class.java)
-            .getMovies()
-            .results.map { it.toMovie() }
+        moviesService.getMovies().results.map { it.toMovie() }
 
 }
