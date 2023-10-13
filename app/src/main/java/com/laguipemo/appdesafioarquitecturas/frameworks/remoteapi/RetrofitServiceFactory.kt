@@ -1,5 +1,6 @@
 package com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi
 
+import com.laguipemo.appdesafioarquitecturas.domain.model.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -25,7 +26,7 @@ class RetrofitServiceFactory {
 
     val retrofit: Retrofit by lazy{
         Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
