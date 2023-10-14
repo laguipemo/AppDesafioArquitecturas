@@ -3,7 +3,6 @@ package com.laguipemo.appdesafioarquitecturas.frameworks.datasourcesimpl.remote
 import com.laguipemo.appdesafioarquitecturas.data.datasources.remote.RemoteDataSource
 import com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.apiservice.MoviesService
 import com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.model.toMovie
-import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
 
 /**
  * Project: AppDesafioArquitecturas
@@ -16,7 +15,7 @@ import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
 
 class RemoteDataSourceImpl(private val moviesService: MoviesService) : RemoteDataSource {
 
-    override suspend fun getMovies(): List<Movie> =
+    override suspend fun getMovies(): List<com.laguipemo.appdesafioarquitecturas.domain.model.Movie> =
         moviesService.getMovies().remoteMovies.map { it.toMovie() }
 
 }

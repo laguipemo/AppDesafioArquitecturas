@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onMovieClick(movie: Movie) {
+    private fun onMovieClick(movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie) {
         Toast.makeText(this, movie.title, Toast.LENGTH_SHORT).show()
     }
 

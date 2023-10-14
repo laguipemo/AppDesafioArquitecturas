@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
  **/
 
 class MainViewModel(
-    private val repository: MoviesRepository
+    private val repository: com.laguipemo.appdesafioarquitecturas.data.MoviesRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
@@ -62,10 +62,10 @@ class MainViewModel(
 
     data class UiState(
         var isLoading: Boolean = false,
-        val movies: List<Movie> = emptyList()
+        val movies: List<com.laguipemo.appdesafioarquitecturas.domain.model.Movie> = emptyList()
     )
 
-    class MainViewModelFactory(private val repository: MoviesRepository) : ViewModelProvider.Factory {
+    class MainViewModelFactory(private val repository: com.laguipemo.appdesafioarquitecturas.data.MoviesRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")

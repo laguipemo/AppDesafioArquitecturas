@@ -2,9 +2,7 @@ package com.laguipemo.appdesafioarquitecturas
 
 import android.app.Application
 import com.laguipemo.appdesafioarquitecturas.data.MoviesRepository
-import com.laguipemo.appdesafioarquitecturas.data.datasources.local.LocalDataSource
 import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.MoviesDatabase
-import com.laguipemo.appdesafioarquitecturas.data.datasources.remote.RemoteDataSource
 import com.laguipemo.appdesafioarquitecturas.frameworks.datasourcesimpl.local.LocalDataSourceImpl
 import com.laguipemo.appdesafioarquitecturas.frameworks.datasourcesimpl.remote.RemoteDataSourceImpl
 import com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.RetrofitServiceFactory
@@ -25,8 +23,8 @@ class MoviesApplication : Application(){
     private val database : MoviesDatabase by lazy { MoviesDatabase.getDatabase(this) }
     private val retrofit: Retrofit by lazy { RetrofitServiceFactory.getInstance().retrofit }
 
-    val repository: MoviesRepository by lazy {
-        MoviesRepository(
+    val repository: com.laguipemo.appdesafioarquitecturas.data.MoviesRepository by lazy {
+        com.laguipemo.appdesafioarquitecturas.data.MoviesRepository(
             LocalDataSourceImpl(database.moviesDao()),
             RemoteDataSourceImpl(retrofit.create(MoviesService::class.java))
         )

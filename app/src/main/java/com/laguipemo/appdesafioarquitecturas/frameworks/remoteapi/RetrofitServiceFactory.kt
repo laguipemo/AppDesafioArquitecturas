@@ -26,7 +26,7 @@ class RetrofitServiceFactory {
 
     val retrofit: Retrofit by lazy{
         Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(com.laguipemo.appdesafioarquitecturas.domain.common.Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

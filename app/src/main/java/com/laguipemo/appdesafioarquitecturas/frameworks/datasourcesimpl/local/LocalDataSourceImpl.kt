@@ -1,9 +1,7 @@
 package com.laguipemo.appdesafioarquitecturas.frameworks.datasourcesimpl.local
 
-import com.laguipemo.appdesafioarquitecturas.data.datasources.local.LocalDataSource
-import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
-import com.laguipemo.appdesafioarquitecturas.domain.model.toLocalMovie
 import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.daos.MoviesDao
+import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.entities.toLocalMovie
 import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.entities.toMovie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -17,20 +15,21 @@ import kotlinx.coroutines.flow.map
  * https://github.com/laguipemo/
  **/
 
-class LocalDataSourceImpl(private val dao: MoviesDao) : LocalDataSource {
+class LocalDataSourceImpl(private val dao: MoviesDao) :
+    com.laguipemo.appdesafioarquitecturas.data.datasources.local.LocalDataSource {
 
-    override val movies: Flow<List<Movie>>
+    override val movies: Flow<List<com.laguipemo.appdesafioarquitecturas.domain.model.Movie>>
         get() = dao.getMovies().map { localMovies -> localMovies.map { it.toMovie() }}
 
-    override suspend fun insertMovie(movie: Movie) {
+    override suspend fun insertMovie(movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie) {
         dao.insertMovie(movie.toLocalMovie())
     }
 
-    override suspend fun insertMovies(movies: List<Movie>) {
+    override suspend fun insertMovies(movies: List<com.laguipemo.appdesafioarquitecturas.domain.model.Movie>) {
         dao.insertMovies(movies.map { it.toLocalMovie() })
     }
 
-    override suspend fun updateMovie(movie: Movie) {
+    override suspend fun updateMovie(movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie) {
         dao.updateMovie(movie.toLocalMovie())
     }
 

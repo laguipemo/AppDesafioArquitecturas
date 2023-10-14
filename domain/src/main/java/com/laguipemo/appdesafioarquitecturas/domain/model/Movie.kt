@@ -1,6 +1,5 @@
 package com.laguipemo.appdesafioarquitecturas.domain.model
 
-import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.entities.LocalMovie
 
 /**
  * Project: AppDesafioArquitecturas
@@ -19,15 +18,4 @@ data class Movie(
     val backdropPath: String,
     val posterPath: String,
     val isFavorite: Boolean = false
-)
-
-//Mappers
-fun Movie.toLocalMovie() = LocalMovie(
-    id = id,
-    title = title,
-    overview = overview,
-    voteAverage = voteAverage,
-    backdropPath = backdropPath,
-    posterPath = posterPath,
-    isFavorite = isFavorite
 )

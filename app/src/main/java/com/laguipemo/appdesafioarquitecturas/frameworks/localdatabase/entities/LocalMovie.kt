@@ -36,3 +36,13 @@ fun LocalMovie.toMovie() = Movie(
     isFavorite = isFavorite
 )
 
+fun Movie.toLocalMovie() = LocalMovie(
+    id = id,
+    title = title,
+    overview = overview,
+    voteAverage = voteAverage,
+    backdropPath = backdropPath,
+    posterPath = posterPath,
+    isFavorite = isFavorite
+)
+

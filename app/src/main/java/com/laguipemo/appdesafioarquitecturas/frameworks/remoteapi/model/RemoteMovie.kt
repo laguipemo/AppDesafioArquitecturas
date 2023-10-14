@@ -56,3 +56,4 @@ fun RemoteMovie.toMovie() = Movie(
     posterPath = posterPath,
     isFavorite = isFavorite
 )
+

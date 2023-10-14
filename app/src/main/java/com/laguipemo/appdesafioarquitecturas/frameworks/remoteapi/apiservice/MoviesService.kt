@@ -16,9 +16,9 @@ import retrofit2.http.Query
 
 interface MoviesService {
 
-    @GET(Constants.STATIC_API_URL)
+    @GET(com.laguipemo.appdesafioarquitecturas.domain.common.Constants.STATIC_API_URL)
     suspend fun getMovies(
-        @Query("api_key") apiKey: String = Constants.APY_KEY,
-        @Query("region") region: String = Constants.REGION,
+        @Query("api_key") apiKey: String = com.laguipemo.appdesafioarquitecturas.domain.common.Constants.APY_KEY,
+        @Query("region") region: String = com.laguipemo.appdesafioarquitecturas.domain.common.Constants.REGION,
     ): RemoteResult
 }

@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":domain")))
     val androidxCoreVersion = "1.10.0"
     val appcompatVersion = "1.6.1"
     val materialVersion = "1.9.0"
@@ -77,6 +78,11 @@ dependencies {
     ksp("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     implementation("androidx.room:room-runtime:$roomVersion")
+
+    // Clean Architecture layers dependencies
+    implementation(project(":domain"))
+    implementation(project(":data"))
+    implementation(project(":usecases"))
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

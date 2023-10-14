@@ -1,11 +1,7 @@
 package com.laguipemo.appdesafioarquitecturas.data.datasources.local
 
 import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
-import com.laguipemo.appdesafioarquitecturas.domain.model.toLocalMovie
-import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.daos.MoviesDao
-import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.entities.toMovie
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 /**
  * Project: AppDesafioArquitecturas
@@ -18,13 +14,13 @@ import kotlinx.coroutines.flow.map
 
 interface LocalDataSource {
 
-    val movies: Flow<List<Movie>>
+    val movies: Flow<List<com.laguipemo.appdesafioarquitecturas.domain.model.Movie>>
 
-    suspend fun insertMovie(movie: Movie)
+    suspend fun insertMovie(movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie)
 
-    suspend fun insertMovies(movies: List<Movie>)
+    suspend fun insertMovies(movies: List<com.laguipemo.appdesafioarquitecturas.domain.model.Movie>)
 
-    suspend fun updateMovie(movie: Movie)
+    suspend fun updateMovie(movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie)
 
     suspend fun getCount(): Int
 

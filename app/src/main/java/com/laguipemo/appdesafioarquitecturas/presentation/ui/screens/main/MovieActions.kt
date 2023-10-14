@@ -12,7 +12,7 @@ import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
  **/
 
 sealed interface MovieAction {
-    class MovieFavoriteClick(val movie: Movie) : MovieAction
-    class MovieDeleteClick(val movie: Movie) : MovieAction
-    class MovieShareClick(val movie: Movie) : MovieAction
+    class MovieFavoriteClick(val movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie) : MovieAction
+    class MovieDeleteClick(val movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie) : MovieAction
+    class MovieShareClick(val movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie) : MovieAction
 }
