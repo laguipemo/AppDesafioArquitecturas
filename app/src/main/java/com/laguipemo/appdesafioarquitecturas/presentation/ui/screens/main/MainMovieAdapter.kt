@@ -24,9 +24,9 @@ import com.laguipemo.appdesafioarquitecturas.databinding.ItemMovieBinding
  **/
 
 class MainMovieAdapter(
-    private val onMovieClick: (movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie) -> Unit,
+    private val onMovieClick: (movie: Movie) -> Unit,
     private val onMovieAction: (movieAction: MovieAction) -> Unit
-) : ListAdapter<com.laguipemo.appdesafioarquitecturas.domain.model.Movie, MainMovieAdapter.ViewHolder>(MovieDiffCallback) {
+) : ListAdapter<Movie, MainMovieAdapter.ViewHolder>(MovieDiffCallback) {
 
     private lateinit var mContext: Context
 
@@ -46,13 +46,13 @@ class MainMovieAdapter(
 
     inner class ViewHolder(
         view: View,
-        private val onMovieClick: (movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie) -> Unit,
+        private val onMovieClick: (movie: Movie) -> Unit,
         private val onMovieAction: (movieAction: MovieAction) -> Unit
     ) : RecyclerView.ViewHolder(view) {
 
         private var binding = DataBindingUtil.bind<ItemMovieBinding>(view)
 
-        fun bind(movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie) {
+        fun bind(movie: Movie) {
             with(binding!!){
                 tvMovieTitle.text = movie.title
                 tvMovieVoteAvg.text = movie.voteAverage.toString()
@@ -82,11 +82,11 @@ class MainMovieAdapter(
 
     }
 
-    private object MovieDiffCallback : DiffUtil.ItemCallback<com.laguipemo.appdesafioarquitecturas.domain.model.Movie>() {
-        override fun areItemsTheSame(oldItem: com.laguipemo.appdesafioarquitecturas.domain.model.Movie, newItem: com.laguipemo.appdesafioarquitecturas.domain.model.Movie): Boolean =
+    private object MovieDiffCallback : DiffUtil.ItemCallback<Movie>() {
+        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: com.laguipemo.appdesafioarquitecturas.domain.model.Movie, newItem: com.laguipemo.appdesafioarquitecturas.domain.model.Movie): Boolean  =
+        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean  =
             oldItem == newItem
     }
 

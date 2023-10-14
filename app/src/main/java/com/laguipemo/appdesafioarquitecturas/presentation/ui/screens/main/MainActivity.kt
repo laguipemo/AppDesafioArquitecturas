@@ -19,7 +19,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mAdapter: MainMovieAdapter
     private val mViewModel: MainViewModel by viewModels {
-        MainViewModel.MainViewModelFactory((application as MoviesApplication).repository)
+        MainViewModel.MainViewModelFactory(
+            (application as MoviesApplication).requestMovieUseCase,
+            (application as MoviesApplication).readMoviesUseCases,
+            (application as MoviesApplication).updateMovieUseCase
+        )
     }
 
 
@@ -58,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onMovieClick(movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie) {
+    private fun onMovieClick(movie: Movie) {
         Toast.makeText(this, movie.title, Toast.LENGTH_SHORT).show()
     }
 

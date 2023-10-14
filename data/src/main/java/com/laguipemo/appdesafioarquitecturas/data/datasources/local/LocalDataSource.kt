@@ -14,13 +14,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
 
-    val movies: Flow<List<com.laguipemo.appdesafioarquitecturas.domain.model.Movie>>
+    val movies: Flow<List<Movie>>
 
-    suspend fun insertMovie(movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie)
+    suspend fun insertMovie(movie: Movie)
 
-    suspend fun insertMovies(movies: List<com.laguipemo.appdesafioarquitecturas.domain.model.Movie>)
+    suspend fun insertMovies(movies: List<Movie>)
 
-    suspend fun updateMovie(movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie)
+    suspend fun updateMovie(movie: Movie)
 
     suspend fun getCount(): Int
 

@@ -15,12 +15,12 @@ import kotlinx.coroutines.flow.Flow
  **/
 
 class MoviesRepository (
-    private val localDataSource: com.laguipemo.appdesafioarquitecturas.data.datasources.local.LocalDataSource,
-    private val remoteDataSource: com.laguipemo.appdesafioarquitecturas.data.datasources.remote.RemoteDataSource
+    private val localDataSource: LocalDataSource,
+    private val remoteDataSource: RemoteDataSource
 ) {
-    val movies: Flow<List<com.laguipemo.appdesafioarquitecturas.domain.model.Movie>> = localDataSource.movies
+    val movies: Flow<List<Movie>> = localDataSource.movies
 
-    suspend fun updateMovie(movie: com.laguipemo.appdesafioarquitecturas.domain.model.Movie) {
+    suspend fun updateMovie(movie: Movie) {
         localDataSource.updateMovie(movie)
     }
 

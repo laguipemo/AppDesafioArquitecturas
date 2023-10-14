@@ -7,6 +7,9 @@ import com.laguipemo.appdesafioarquitecturas.frameworks.datasourcesimpl.local.Lo
 import com.laguipemo.appdesafioarquitecturas.frameworks.datasourcesimpl.remote.RemoteDataSourceImpl
 import com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.RetrofitServiceFactory
 import com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.apiservice.MoviesService
+import com.laguipemo.appdesafioarquitecturas.usecases.ReadMoviesUseCases
+import com.laguipemo.appdesafioarquitecturas.usecases.RequestMovieUseCase
+import com.laguipemo.appdesafioarquitecturas.usecases.UpdateMovieUseCase
 import retrofit2.Retrofit
 
 /**
@@ -22,11 +25,13 @@ class MoviesApplication : Application(){
 
     private val database : MoviesDatabase by lazy { MoviesDatabase.getDatabase(this) }
     private val retrofit: Retrofit by lazy { RetrofitServiceFactory.getInstance().retrofit }
-
-    val repository: com.laguipemo.appdesafioarquitecturas.data.MoviesRepository by lazy {
-        com.laguipemo.appdesafioarquitecturas.data.MoviesRepository(
+    val repository: MoviesRepository by lazy {
+        MoviesRepository(
             LocalDataSourceImpl(database.moviesDao()),
             RemoteDataSourceImpl(retrofit.create(MoviesService::class.java))
         )
     }
+    val requestMovieUseCase: RequestMovieUseCase by lazy {  RequestMovieUseCase(repository)}
+    val readMoviesUseCases: ReadMoviesUseCases by lazy { ReadMoviesUseCases(repository) }
+    val updateMovieUseCase: UpdateMovieUseCase by lazy { UpdateMovieUseCase(repository) }
 }

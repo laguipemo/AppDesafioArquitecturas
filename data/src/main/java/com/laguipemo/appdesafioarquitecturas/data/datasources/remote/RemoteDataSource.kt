@@ -12,5 +12,5 @@ import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
  **/
 
 interface RemoteDataSource {
-    suspend fun getMovies(): List<com.laguipemo.appdesafioarquitecturas.domain.model.Movie>
+    suspend fun getMovies(): List<Movie>
 }

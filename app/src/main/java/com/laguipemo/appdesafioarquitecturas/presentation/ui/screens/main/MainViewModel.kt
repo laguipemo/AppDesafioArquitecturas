@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
 import com.laguipemo.appdesafioarquitecturas.data.MoviesRepository
+import com.laguipemo.appdesafioarquitecturas.usecases.ReadMoviesUseCases
+import com.laguipemo.appdesafioarquitecturas.usecases.RequestMovieUseCase
+import com.laguipemo.appdesafioarquitecturas.usecases.UpdateMovieUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,7 +24,9 @@ import kotlinx.coroutines.launch
  **/
 
 class MainViewModel(
-    private val repository: com.laguipemo.appdesafioarquitecturas.data.MoviesRepository
+    private val requestMovieUseCase: RequestMovieUseCase,
+    private val readMoviesUseCases: ReadMoviesUseCases,
+    private val updateMovieUseCase: UpdateMovieUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
@@ -30,8 +35,8 @@ class MainViewModel(
     init {
         viewModelScope.launch {
             _state.update {it.copy(isLoading = true)}
-            repository.requestMovies()
-            repository.movies.collect { movies ->
+            requestMovieUseCase()
+            readMoviesUseCases().collect { movies ->
                 _state.update {
                     it.copy(
                         isLoading = false,
@@ -46,7 +51,7 @@ class MainViewModel(
         when (movieAction) {
             is MovieAction.MovieFavoriteClick -> {
                 viewModelScope.launch {
-                    repository.updateMovie(
+                    updateMovieUseCase(
                         movieAction.movie.copy(
                             isFavorite = !movieAction.movie.isFavorite
                         )
@@ -62,14 +67,20 @@ class MainViewModel(
 
     data class UiState(
         var isLoading: Boolean = false,
-        val movies: List<com.laguipemo.appdesafioarquitecturas.domain.model.Movie> = emptyList()
+        val movies: List<Movie> = emptyList()
     )
 
-    class MainViewModelFactory(private val repository: com.laguipemo.appdesafioarquitecturas.data.MoviesRepository) : ViewModelProvider.Factory {
+    class MainViewModelFactory(
+        private val requestMovieUseCase: RequestMovieUseCase,
+        private val readMoviesUseCases: ReadMoviesUseCases,
+        private val updateMovieUseCase: UpdateMovieUseCase
+    ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return MainViewModel(repository) as T
+                return MainViewModel(
+                    requestMovieUseCase, readMoviesUseCases, updateMovieUseCase
+                ) as T
             } else {
                 throw IllegalArgumentException("ViewModel Not Found")
             }

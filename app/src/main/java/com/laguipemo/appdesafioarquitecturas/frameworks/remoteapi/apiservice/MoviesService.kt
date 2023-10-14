@@ -1,6 +1,9 @@
 package com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.apiservice
 
 import com.laguipemo.appdesafioarquitecturas.domain.common.Constants
+import com.laguipemo.appdesafioarquitecturas.domain.common.Constants.APY_KEY
+import com.laguipemo.appdesafioarquitecturas.domain.common.Constants.REGION
+import com.laguipemo.appdesafioarquitecturas.domain.common.Constants.STATIC_API_URL
 import com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.model.RemoteResult
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -16,9 +19,9 @@ import retrofit2.http.Query
 
 interface MoviesService {
 
-    @GET(com.laguipemo.appdesafioarquitecturas.domain.common.Constants.STATIC_API_URL)
+    @GET(STATIC_API_URL)
     suspend fun getMovies(
-        @Query("api_key") apiKey: String = com.laguipemo.appdesafioarquitecturas.domain.common.Constants.APY_KEY,
-        @Query("region") region: String = com.laguipemo.appdesafioarquitecturas.domain.common.Constants.REGION,
+        @Query("api_key") apiKey: String = APY_KEY,
+        @Query("region") region: String = REGION,
     ): RemoteResult
 }
