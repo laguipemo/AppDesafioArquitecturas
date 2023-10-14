@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
 import com.laguipemo.appdesafioarquitecturas.frameworks.localdatabase.entities.LocalMovie
 
-data class ServerMovie(
+data class RemoteMovie(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")
@@ -36,7 +36,8 @@ data class ServerMovie(
     val isFavorite: Boolean = false
 )
 
-fun ServerMovie.toLocalMovie() = LocalMovie(
+//Mappers
+fun RemoteMovie.toLocalMovie() = LocalMovie(
     id = 0,
     title = title,
     overview = overview,
@@ -46,7 +47,7 @@ fun ServerMovie.toLocalMovie() = LocalMovie(
     isFavorite = isFavorite
 )
 
-fun ServerMovie.toMovie() = Movie(
+fun RemoteMovie.toMovie() = Movie(
     id = id,
     title = title,
     overview = overview,

@@ -1,4 +1,4 @@
-package com.laguipemo.appdesafioarquitecturas.domain.model
+package com.laguipemo.appdesafioarquitecturas.domain.common
 
 /**
  * Project: AppDesafioArquitecturas

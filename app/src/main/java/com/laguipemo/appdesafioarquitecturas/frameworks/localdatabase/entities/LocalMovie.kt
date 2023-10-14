@@ -25,6 +25,7 @@ data class LocalMovie(
     val isFavorite: Boolean = false
 )
 
+//Mappers
 fun LocalMovie.toMovie() = Movie(
     id = id,
     title = title,

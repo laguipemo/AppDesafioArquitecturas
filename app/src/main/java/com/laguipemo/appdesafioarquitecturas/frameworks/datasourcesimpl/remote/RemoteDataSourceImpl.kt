@@ -4,7 +4,6 @@ import com.laguipemo.appdesafioarquitecturas.data.datasources.remote.RemoteDataS
 import com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.apiservice.MoviesService
 import com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.model.toMovie
 import com.laguipemo.appdesafioarquitecturas.domain.model.Movie
-import com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.RetrofitServiceFactory
 
 /**
  * Project: AppDesafioArquitecturas
@@ -18,6 +17,6 @@ import com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi.RetrofitServic
 class RemoteDataSourceImpl(private val moviesService: MoviesService) : RemoteDataSource {
 
     override suspend fun getMovies(): List<Movie> =
-        moviesService.getMovies().results.map { it.toMovie() }
+        moviesService.getMovies().remoteMovies.map { it.toMovie() }
 
 }
