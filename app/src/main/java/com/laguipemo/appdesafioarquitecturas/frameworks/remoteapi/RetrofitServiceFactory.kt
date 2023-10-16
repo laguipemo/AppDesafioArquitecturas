@@ -1,6 +1,6 @@
 package com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi
 
-import com.laguipemo.appdesafioarquitecturas.frameworks.common.Constants.BASE_URL
+import com.laguipemo.appdesafioarquitecturas.domain.common.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
