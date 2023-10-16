@@ -12,7 +12,7 @@ package com.laguipemo.appdesafioarquitecturas.domain.common
 object Constants {
 
     const val BASE_URL = "https://api.themoviedb.org/3/"
-    const val STATIC_API_URL = "https://api.themoviedb.org/3/movie/"
+    const val STATIC_API_URL = "discover/movie"
     const val APY_KEY = "69c4fb98d771991f2cbf2edbe3b2ea88"
     const val REGION = "ES"
 

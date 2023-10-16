@@ -25,7 +25,7 @@ class MoviesApplication : Application(){
 
     private val database : MoviesDatabase by lazy { MoviesDatabase.getDatabase(this) }
     private val retrofit: Retrofit by lazy { RetrofitServiceFactory.getInstance().retrofit }
-    val repository: MoviesRepository by lazy {
+    private val repository: MoviesRepository by lazy {
         MoviesRepository(
             LocalDataSourceImpl(database.moviesDao()),
             RemoteDataSourceImpl(retrofit.create(MoviesService::class.java))
