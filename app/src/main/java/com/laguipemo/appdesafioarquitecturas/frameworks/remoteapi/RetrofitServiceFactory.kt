@@ -1,6 +1,6 @@
 package com.laguipemo.appdesafioarquitecturas.frameworks.remoteapi
 
-import com.laguipemo.appdesafioarquitecturas.domain.common.Constants.BASE_URL
+import com.laguipemo.appdesafioarquitecturas.domain.common.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -26,7 +26,7 @@ class RetrofitServiceFactory {
 
     val retrofit: Retrofit by lazy{
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
