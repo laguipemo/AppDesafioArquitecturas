@@ -21,5 +21,5 @@ object MovieApiClient {
         .baseUrl(Constants.BASE_URL)
         .build()
 
-    val retrofitService: MoviesApiService by lazy { retrofit.create(MoviesApiService::class.java) }
+    val service: MoviesApiService by lazy { retrofit.create(MoviesApiService::class.java) }
 }

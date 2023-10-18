@@ -23,7 +23,7 @@ import com.laguipemo.appdesafioarquitecturas.usecases.UpdateMovieUseCase
 class MoviesApplication : Application(){
 
     private val database : MoviesDatabase by lazy { MoviesDatabase.getDatabase(this) }
-    private val retrofitService: MoviesApiService by lazy { MovieApiClient.retrofitService }
+    private val retrofitService: MoviesApiService by lazy { MovieApiClient.service }
     private val repository: MoviesRepository by lazy {
         MoviesRepository(
             LocalDataSourceImpl(database.moviesDao()),
