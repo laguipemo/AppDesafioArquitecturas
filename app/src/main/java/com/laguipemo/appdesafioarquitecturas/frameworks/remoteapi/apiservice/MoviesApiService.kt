@@ -14,7 +14,7 @@ import retrofit2.http.Query
  * https://github.com/laguipemo/
  **/
 
-interface MoviesService {
+interface MoviesApiService {
 
     @GET(Constants.STATIC_API_URL)
     suspend fun getMovies(
